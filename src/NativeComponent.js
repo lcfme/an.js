@@ -20,6 +20,9 @@ NativeComponent.prototype.mount = function() {
   } else {
     pixiObj = new type(...initialize);
   }
+  if (props.ref) {
+    props.ref(pixiObj);
+  }
   for (let prop in props) {
     if (/^on([\S\S]+)/i.test(prop)) {
       const listenerName = prop.match(/^on([\S\S]+)/)[1].toLowerCase();
@@ -57,12 +60,12 @@ NativeComponent.prototype.receive = function(element) {
   const prevType = prevElement.type;
   const prevProps = prevElement.props;
   const type = element.type;
-  this.currentElement = element;
   if (prevProps.initialize || prevType !== type) {
     this.unmount();
-  } else {
-    this.update();
+    return;
   }
+  this.currentElement = element;
+  this.update();
 };
 
 NativeComponent.prototype.update = function() {
@@ -126,6 +129,12 @@ NativeComponent.prototype.getPixiObj = function() {
 };
 
 NativeComponent.prototype.unmount = function() {
+  const element = this.currentElement;
+  const props = element.props;
+
+  if (props.ref) {
+    props.ref(null);
+  }
   if (this._listeners && this._listeners.length) {
     for (let i = this._listeners.length; i--; ) {
       this.pixiObj.off(this._listeners[i][0], this._listeners[i][1]);

@@ -16,6 +16,11 @@ CompositeComponent.prototype.mount = function() {
   publicInstance.props = props;
   publicInstance.__instance__ = this;
   this.publicInstance = publicInstance;
+
+  if (props.ref) {
+    props.ref(publicInstance);
+  }
+
   if (publicInstance.beforeMount) {
     publicInstance.beforeMount();
   }
@@ -45,6 +50,7 @@ CompositeComponent.prototype.receive = function(element) {
     this._dirty = false;
     return;
   }
+  this.currentElement = element;
   if (publicInstance.beforeUpdate) {
     publicInstance.beforeUpdate();
   }
@@ -86,6 +92,12 @@ CompositeComponent.prototype.receive = function(element) {
 CompositeComponent.prototype.unmount = function() {
   const publicInstance = this.publicInstance;
   const renderedComponent = this.renderedComponent;
+  const element = this.currentElement;
+  const props = prevElement.props;
+
+  if (props.ref) {
+    props.ref(null);
+  }
 
   if (publicInstance.willUnmount) {
     publicInstance.willUnmount();
