@@ -2,17 +2,17 @@ const instantiateComponent = require("./instantiateComponent");
 const lifycycle = require("./lifycycle");
 const getPixi = require("./pixiInjection").getPixi;
 
-function render(element, options = {}) {
-  const _PIXI = getPixi();
-  const pixiApp = new _PIXI.Application(options);
+function render(element, displayContObj) {
+  if (displayContObj.__An_Instance__) {
+    displayContObj.__An_Instance__.unmount();
+  }
   lifycycle.mounted.reset();
   const component = instantiateComponent(element);
   const pixiObj = component.mount();
-  pixiApp.stage.addChild(pixiObj);
+  displayContObj.addChild(pixiObj);
   lifycycle.mounted.flush();
-  pixiApp.__An_Instance__ = component;
-
-  return pixiApp;
+  displayContObj.__An_Instance__ = component;
+  return displayContObj;
 }
 
 module.exports = render;

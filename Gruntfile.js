@@ -48,7 +48,6 @@ module.exports = function(grunt) {
           watch: true,
           browserifyOptions: {
             standalone: "An",
-            debug: true
           },
           transform: [
             [
