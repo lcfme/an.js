@@ -1,5 +1,4 @@
-
-  ;(function(f) {
+;(function(f) {
     // CommonJS
     if (typeof exports === "object" && typeof module !== "undefined") {
       module.exports = f(require('pixi.js'));

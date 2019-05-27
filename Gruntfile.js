@@ -4,8 +4,7 @@ function wrapperify(src, exposeName) {
     throw new Error("wrapperify failed to find code to replace");
   }
   src = src.replace(toReplace, `function(f){return f()}`);
-  return `
-  ;(function(f) {
+  return `;(function(f) {
     // CommonJS
     if (typeof exports === "object" && typeof module !== "undefined") {
       module.exports = f(require('pixi.js'));
