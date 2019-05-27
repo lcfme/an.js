@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <script src="pixi.js"></script>
+    <script src="dist/an.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const element = An.createElement(
+        PIXI.Container,
+        null,
+        An.createElement(PIXI.Text, {
+          initialize: ["Basic text in pixi"],
+          x: 10,
+          y: 20
+        }),
+        An.createElement(PIXI.Text, {
+          initialize: ["Author: Liu Chaofan"],
+          x: 40,
+          y: 60
+        })
+      );
+
+      const newElement = An.createElement(
+        PIXI.Container,
+        null,
+        An.createElement(PIXI.Text, {
+          initialize: ["Author: Liu Chaofan"],
+          x: 40,
+          y: 60
+        })
+      );
+
+      const newTextElement = An.createElement(PIXI.Text, {
+        initialize: ["PIXI Text"]
+      });
+      class App extends An.Component {
+        constructor(props, context) {
+          super(props, context);
+        }
+        beforeMount() {
+          console.log("App beforeMount");
+        }
+        mounted() {
+          console.log("App mounted");
+        }
+        beforeUpdate() {
+          console.log("App beforeUpdate");
+        }
+        updated() {
+          console.log("App Updated");
+        }
+        render() {
+          return An.createElement(
+            PIXI.Container,
+            null,
+            An.createElement(PIXI.Text, {
+              initialize: ["props: " + this.props.a],
+              x: 40,
+              y: 60
+            })
+          );
+        }
+      }
+      class Bpp extends An.Component {
+        constructor(props, context) {
+          super(props, context);
+          this.state = {
+            a: true
+          };
+        }
+        beforeMount() {
+          console.log("Bpp beforeMount");
+        }
+        beforeUpdate() {
+          console.log("Bpp beforeUpdate");
+        }
+        updated() {
+          console.log("Bpp Updated");
+        }
+        mounted() {
+          console.log("Bpp mounted");
+          setTimeout(() => {
+            this.setState({
+              a: !this.state.a
+            });
+          }, 1000);
+        }
+        render() {
+          return An.createElement(App, this.state);
+        }
+      }
+
+      const componentElement = An.createElement(Bpp);
+
+      const pixiApp = An.render(componentElement, {
+        backgroundColor: 0xffffff
+      });
+      document.querySelector("#app").appendChild(pixiApp.view);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "an.js",
+  "version": "1.0.0",
+  "main": "src/An.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "aliasify": "^2.1.0",
+    "babelify": "^10.0.0",
+    "browserify": "^16.2.3",
+    "cross-env": "^5.2.0",
+    "envify": "^4.1.0",
+    "grunt": "^1.0.4",
+    "grunt-browserify": "^5.3.0",
+    "grunt-contrib-watch": "^1.1.0"
+  },
+  "scripts": {
+    "start": "cross-env NODE_ENV=development grunt & http-server",
+    "build": "cross-env NODE_ENV=production grunt build"
+  },
+  "peerDependencies": {
+    "pixi.js": "^5.0.3"
+  }
+}
