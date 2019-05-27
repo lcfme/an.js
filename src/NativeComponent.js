@@ -20,11 +20,9 @@ NativeComponent.prototype.mount = function() {
   } else {
     pixiObj = new type(...initialize);
   }
-
-  for (let i = props.length; i--; ) {
-    let prop = props[i];
-    if (/^on([\S\S]+)/.test(prop)) {
-      const listenerName = prop.match(/^on([\S\S]+)/)[1];
+  for (let prop in props) {
+    if (/^on([\S\S]+)/i.test(prop)) {
+      const listenerName = prop.match(/^on([\S\S]+)/)[1].toLowerCase();
       const listenerFn = props[prop];
       pixiObj.on(listenerName, listenerFn);
       (this._listeners || (this._listeners = [])).push([

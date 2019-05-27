@@ -61,6 +61,8 @@
             null,
             An.createElement(PIXI.Text, {
               initialize: ["props: " + this.props.a],
+              interactive: true,
+              onpointerup: this.props.onpointerup,
               x: 40,
               y: 60
             })
@@ -83,16 +85,20 @@
         updated() {
           console.log("Bpp Updated");
         }
+        toggleState(e) {
+          console.log(e);
+          this.setState({
+            a: !this.state.a
+          });
+        }
         mounted() {
           console.log("Bpp mounted");
-          setTimeout(() => {
-            this.setState({
-              a: !this.state.a
-            });
-          }, 1000);
         }
         render() {
-          return An.createElement(App, this.state);
+          return An.createElement(App, {
+            onpointerup: this.toggleState.bind(this),
+            ...this.state
+          });
         }
       }
 
