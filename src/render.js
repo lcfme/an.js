@@ -12,7 +12,7 @@ function render(element, displayContObj) {
   displayContObj.addChild(pixiObj);
   lifycycle.mounted.flush();
   displayContObj.__An_Instance__ = component;
-  return displayContObj;
+  return pixiObj;
 }
 
 module.exports = render;
