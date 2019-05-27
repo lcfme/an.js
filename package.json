@@ -1,7 +1,7 @@
 {
   "name": "an.js",
   "version": "1.0.0",
-  "main": "src/An.js",
+  "main": "dist/an.js",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.5",
