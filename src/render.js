@@ -1,6 +1,5 @@
 const instantiateComponent = require("./instantiateComponent");
 const lifycycle = require("./lifycycle");
-const getPixi = require("./pixiInjection").getPixi;
 
 function render(element, displayContObj) {
   if (displayContObj.__An_Instance__) {
