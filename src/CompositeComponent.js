@@ -93,7 +93,7 @@ CompositeComponent.prototype.unmount = function() {
   const publicInstance = this.publicInstance;
   const renderedComponent = this.renderedComponent;
   const element = this.currentElement;
-  const props = prevElement.props;
+  const props = element.props;
 
   if (props.ref) {
     props.ref(null);
